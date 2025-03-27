@@ -4,7 +4,7 @@ import requests
 
 from .exceptions import RiitagNotFoundError
 
-RIITAG_ENDPOINT = 'http://tag.rc24.xyz/{}/json'
+RIITAG_ENDPOINT = 'https://riitag.t0g3pii.de/{}/json'
 HEADERS = {'User-Agent': 'RiiTag-RPC WatchThread v2'}
 
 
