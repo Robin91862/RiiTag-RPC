@@ -54,7 +54,7 @@ class RiitagWatcher(Thread):
                 app: RiiTagApplication = get_app()
                 app.show_message(
                     'RiiTag not found',
-                    'We couldn\'t find your RiiTag.\n\nTo create one, please visit https://tag.rc24.xyz/'
+                    'We couldn\'t find your RiiTag.\n\nTo create one, please visit https://riitag.t0g3pii.de/'
                 )
 
             return RiitagInfo()
