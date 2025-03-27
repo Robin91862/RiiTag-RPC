@@ -589,7 +589,7 @@ class MainMenu(Menu):
 
     def view_riitag(self):
         client_id = self.app.user.id
-        tag_url = f"https://tag.rc24.xyz/{client_id}"
+        tag_url = f"https://riitag.t0g3pii.de/{client_id}"
         try:
             webbrowser.open(tag_url)
         except webbrowser.Error:
