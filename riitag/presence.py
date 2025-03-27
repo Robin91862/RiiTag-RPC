@@ -25,7 +25,7 @@ def format_presence(riitag_info: RiitagInfo):
         'large_text': title.name,
 
         'small_image': 'logo',
-        'small_text': 'tag.rc24.xyz',
+        'small_text': 'riitag.t0g3pii.de',
 
         'buttons': [
             {'label': 'View RiiTag', 'url': f'https://tag.rc24.xyz/user/{riitag_info.id}'}
