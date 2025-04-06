@@ -21,6 +21,3 @@ We recommend installing it from [Pi-Apps](https://github.com/Botspot/pi-apps), a
 After installing ArmCord and logging in, RiiTag-RPC should work without issues.
 
 RiiConnect24 is not affiliated with any of these projects. Please report any issues directly to their developers.
-
-## Reporting Issues
-Please report any bugs by [creating an issue](https://github.com/t0g3pii/RiiTag-RPC/issues/new).
