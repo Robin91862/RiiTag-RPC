@@ -1,15 +1,13 @@
 # RiiTag-RPC
 
-![](https://img.shields.io/github/downloads/RiiConnect24/RiiTag-RPC/total)
-![](https://img.shields.io/github/actions/workflow/status/RiiConnect24/RiiTag-RPC/build.yml)
-![](https://img.shields.io/github/commit-activity/m/RiiConnect24/RiiTag-RPC)
-![](https://img.shields.io/github/last-commit/RiiConnect24/RiiTag-RPC)
+![](https://img.shields.io/github/commit-activity/m/t0g3pii/RiiTag-RPC)
+![](https://img.shields.io/github/last-commit/t0g3pii/RiiTag-RPC)
 
-RiiTag-RPC allows you to show your Discord friends what you're playing on your Wii or Wii U by connecting to your [RiiTag](https://tag.rc24.xyz/) account.
+RiiTag-RPC allows you to show your Discord friends what you're playing on your Wii or Wii U by connecting to your [RiiTag](https://riitag.t0g3pii.de/) account.
 
 ## Instructions
-1. Setup RiiTag (if you haven't already): https://wii.guide/riitag
-2. Grab the latest release from [here](https://github.com/RiiConnect24/RiiTag-RPC/releases/latest).
+1. [Setup RiiTag](/GUIDE.md) (if you haven't already)
+2. Grab the latest release from [GitHub Actions](https://github.com/t0g3pii/RiiTag-RPC/actions)
 3. Unzip, run the program and follow the instructions
 4. Done!
 
@@ -23,6 +21,3 @@ We recommend installing it from [Pi-Apps](https://github.com/Botspot/pi-apps), a
 After installing ArmCord and logging in, RiiTag-RPC should work without issues.
 
 RiiConnect24 is not affiliated with any of these projects. Please report any issues directly to their developers.
-
-## Reporting Issues
-Please report any bugs by [creating an issue](https://github.com/RiiConnect24/RiiTag-RPC/issues/new).
