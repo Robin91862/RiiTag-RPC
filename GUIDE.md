@@ -13,7 +13,7 @@
 2. Click the **Login** button in the top-right corner and sign in with your Discord account.
 3. Authorize the `RiiTag` application when prompted.
 
-> ⚠️ **Do not share your RiiTag key with anyone!** Sharing your key may allow others to misuse your tag.
+> ⚠️ **Warning: Do not share your RiiTag key with anyone!** Sharing your key may allow others to misuse your tag.
 
 To customize your RiiTag:
 - Click your profile in the top-right corner of the website.
@@ -48,7 +48,7 @@ To customize your RiiTag:
 
 ### Configurable USB Loader
 
-> ⚠️ Configurable USB Loader is **outdated** and may have **limited support** compared to USB Loader GX and WiiFlow.
+> ⚠️ **Warning:** Configurable USB Loader is **outdated** and may have **limited support** compared to USB Loader GX and WiiFlow.
 
 > ℹ️ You can use the `CfgLoaderConfigurator.exe` program (Windows only) instead of manually editing the `config.txt` file.
 
@@ -92,7 +92,7 @@ To customize your RiiTag:
 4. Login if you're not already logged in.
 5. Go to your profile > **Account** and click **Copy** to copy your RiiTag key.
 
-> ⚠️ **Do not share your RiiTag key with anyone!** Sharing your key may allow others to misuse your tag.
+> ⚠️ **Warning: Do not share your RiiTag key with anyone!** Sharing your key may allow others to misuse your tag.
 
 6. Create a text document named `utag.txt` in the `wiiu` folder on the root of your SD card.
 7. Open `utag.txt` in Notepad++ and paste your RiiTag key into the file.
