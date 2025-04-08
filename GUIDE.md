@@ -61,12 +61,12 @@ To customize your RiiTag:
 
 > ✅ **Setup complete!** Launch a game to verify RiiTag functionality.
 
-### RiiTag-RPC
+## RiiTag-RPC
 
-#### Requirements
+### Requirements
 - [RiiTag RPC](https://github.com/t0g3pii/RiiTag-RPC/releases/latest)
 
-#### Instructions
+### Instructions
 
 > ℹ️ This program displays your current game on your Discord profile alongside your RiiTag.
 
@@ -76,15 +76,15 @@ To customize your RiiTag:
 
 > ✅ **Setup complete!** Launch a game to verify RiiTag RPC functionality.
 
-### UTag
+## UTag
 
 > ℹ️ This requires a [modded Wii U](https://wiiu.hacks.guide/) running the [Aroma environment](https://wiiu.hacks.guide/aroma/getting-started).
 
-#### Requirements
+### Requirements
 - [UTag](https://github.com/t0g3pii/UTag/releases/latest)
 - [Notepad++](https://notepad-plus-plus.org/downloads/)
 
-#### Instructions
+### Instructions
 
 1. Insert your SD card into your computer.
 2. Open the downloaded ZIP archive and copy `utag.wps` to `wiiu/environments/aroma/plugins/`.
