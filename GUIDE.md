@@ -61,14 +61,14 @@ To customize your RiiTag:
 
 > ✅ **Setup complete!** Launch a game to verify RiiTag functionality.
 
-## RiiTag-RPC
+## RiiTag RPC
+
+> ℹ️ This program displays your current game on your Discord profile alongside your RiiTag.
 
 ### Requirements
 - [RiiTag RPC](https://github.com/t0g3pii/RiiTag-RPC/releases/latest)
 
 ### Instructions
-
-> ℹ️ This program displays your current game on your Discord profile alongside your RiiTag.
 
 1. Run the downloaded executable for your system.
 2. Once loaded, press **Enter** to show the login prompt.
