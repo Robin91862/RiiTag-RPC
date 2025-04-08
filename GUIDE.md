@@ -16,8 +16,8 @@
 > ⚠️ **Warning: Do not share your RiiTag key with anyone!** Sharing your key may allow others to misuse your tag.
 
 To customize your RiiTag:
-- Click your profile in the top-right corner of the website.
-- Select **Edit RiiTag**.
+1. Click your profile in the top-right corner of the website.
+2. Select **Edit RiiTag**.
 
 ## Connecting Your USB Loader
 
