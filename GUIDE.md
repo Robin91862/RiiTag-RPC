@@ -1,105 +1,103 @@
-# Riitag
+# RiiTag Guide
 
-**RiiTag** is a customizable and dynamic gamertag. By sharing your gamertag (a dynamic image), you can show what you've been playing to other people. You need a Discord account to use RiiTag.
+**RiiTag** is a customizable and dynamic gamertag. By sharing your gamertag (a dynamic image), you can showcase your gaming activity to others. A Discord account is required to use RiiTag.
 
 ## Requirements
--   A computer
--   A text editor
--   [A Discord account](https://discord.com/login)
+- A computer
+- A text editor
+- [A Discord account](https://discord.com/login)
 
-### Instructions
-#### Getting started
+## Getting Started
 
-1.  [Go to the t0g3pii's RiiTag website](https://riitag.t0g3pii.de/)
-2.  Press the Login button on the top right, then sign into your Discord account if you aren't already
-3.  A dialog will appear asking if you want to authorize `Riitag`, press Authorize
+1. Visit [t0g3pii's RiiTag website](https://riitag.t0g3pii.de/).
+2. Click the **Login** button in the top-right corner and sign in with your Discord account.
+3. Authorize the `RiiTag` application when prompted.
 
--   If you'd like to customize your RiiTag, press on your profile that is on the top right of the screen, then Edit RiiTag
+> ![Warning icon](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/OOjs_UI_icon_information-warning.svg/20px-OOjs_UI_icon_information-warning.svg.png) ***Warning: Do not share your RiiTag key with anyone!** Sharing your key may allow others to misuse your tag.*
 
-![Warning icon](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/OOjs_UI_icon_information-warning.svg/20px-OOjs_UI_icon_information-warning.svg.png) <u>*Do not share your RiiTag key with anyone! If you do, people can abuse your tag.*</u>
+To customize your RiiTag:
+1. Click your profile in the top-right corner of the website.
+2. Select **Edit RiiTag**.
 
 ## Connecting your USB Loader
 
 ### USB Loader GX
 
-1.  Launch USB Loader GX from the list of homebrew
-2.  Go to `Settings`, then `Features` and turn `Wiinnertag` on. Press Yes or OK to any prompts that appear.
-3.  Ensure that `Initialize Network` is enabled
-4.  Close USB Loader GX
-5.  Insert the storage device that has USB Loader GX into your computer
-6.  Go to the website again, then press on your profile that is on the top right of the screen, then Account, then press You can also download your Wiinnertag.xml. which will download the file needed for RiiTag usage
-7.  Copy the downloaded `Wiinnertag.xml` to `/apps/usbloader_gx` on the storage device that has USB Loader GX.
+1. Launch USB Loader GX from your homebrew list.
+2. Navigate to **Settings > Features** and enable **Wiinnertag**. Confirm any prompts.
+3. Ensure **Initialize Network** is enabled.
+4. Close USB Loader GX.
+5. Insert the storage device containing USB Loader GX into your computer.
+6. Download the `Wiinnertag.xml` file from your [RiiTag account page](https://riitag.t0g3pii.de/account).
+7. Copy the downloaded `Wiinnertag.xml` to `/apps/usbloader_gx` on your storage device.
 
-![Success icon](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/OOjs_UI_icon_information-constructive.svg/20px-OOjs_UI_icon_information-constructive.svg.png) <u>*You have now set up RiiTag on USB Loader GX. Try launching a game to see if it works*</u>
-
+> ![Success icon](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/OOjs_UI_icon_information-constructive.svg/20px-OOjs_UI_icon_information-constructive.svg.png) ***Setup complete!** Launch a game to verify RiiTag functionality.*
 
 ### WiiFlow
 
-1.  Insert the storage device that has WiiFlow into your computer
-2.  Open `/apps/wiiflow/wiiflow.ini` in a text editor
-3.  Search for `gamercards` then replace it with `gamercards=wiinnertag`
-4.  Search for `wiinnertag_url` and replace it with `wiinnertag_url=https://riitag.t0g3pii.de/wii?game={ID6}&key={KEY}`
-5.  Search for `wiinnertag_key` and replace that line with `wiinnertag_key=<key>`, replacing <key> with the key you wrote down in [Section I](https://wiki.hacks.guide/wiki/RiiTag#Getting_started "RiiTag")
-6.  Search for `gamercards_enable` and replace it with `gamercards_enable=yes`.
-7.  Save the modified `wiiflow.ini`
+1. Insert the storage device containing WiiFlow into your computer.
+2. Open `/apps/wiiflow/wiiflow.ini` in a text editor.
+3. Copy your RiiTag key from [here](https://riitag.t0g3pii.de/account).
+4. Modify the file:
+    - Search for `gamercards_enable` and replace it with `gamercards_enable=yes`.
+    - Search for `gamercards` and replace it with `gamercards=wiinnertag`.
+    - Search for `wiinnertag_url` and replace it with `wiinnertag_url=https://riitag.t0g3pii.de/wii?game={ID6}&key={KEY}`.
+    - Search for `wiinnertag_key` and replace it with `wiinnertag_key=<key>`, replacing `<key>` with your RiiTag key.
+5. Save the modified `wiiflow.ini`.
 
-![Success icon](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/OOjs_UI_icon_information-constructive.svg/20px-OOjs_UI_icon_information-constructive.svg.png) <u>*You have now set up RiiTag on WiiFlow. Try launching a game to see if it works*</u>
-
+> ![Success icon](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/OOjs_UI_icon_information-constructive.svg/20px-OOjs_UI_icon_information-constructive.svg.png) ***Setup complete!** Launch a game to verify RiiTag functionality.*
 
 ### Configurable USB Loader
 
-![Info icon](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/OOjs_UI_icon_information-progressive.svg/20px-OOjs_UI_icon_information-progressive.svg.png) <u>*Configurable USB Loader is a heavily outdated USB loader and you have less chance of getting support for it compared to USB Loader GX and WiiFlow Lite.*</u>
+> ![Warning icon](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/OOjs_UI_icon_information-warning.svg/20px-OOjs_UI_icon_information-warning.svg.png) ***Warning:** Configurable USB Loader is **outdated** and may have **limited support** compared to USB Loader GX and WiiFlow.*
 
-![Info icon](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/OOjs_UI_icon_information-progressive.svg/20px-OOjs_UI_icon_information-progressive.svg.png) <u>*You can use the `CfgLoaderConfigurator.exe` program (Windows only) instead of editing the `config.txt` file mentioned below if you want to.*</u>
+> ![Info icon](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/OOjs_UI_icon_information-progressive.svg/20px-OOjs_UI_icon_information-progressive.svg.png) *You can use the `CfgLoaderConfigurator.exe` program (Windows only) instead of manually editing the `config.txt` file.*
 
-1.  Insert the storage device that has Configurable USB Loader into your computer
-2.  Open `/usb-loader/config.txt` in a text editor
-3.  Replace (or add) the line starting with `gamercard_url` with `gamercard_url = http://riitag.t0g3pii.de/wii?game={ID6}&key={KEY}`
-4.  Replace (or add) the line starting with `gamercard_key` with `gamercard_key = <key>`, replacing <key> with the key you wrote down in [Section I](https://wiki.hacks.guide/wiki/RiiTag#Getting_started "RiiTag")
-5.  Save the modified `config.txt`
+1. Insert the storage device containing Configurable USB Loader into your computer.
+2. Open `/usb-loader/config.txt` in a text editor.
+3. Copy your RiiTag key from [here](https://riitag.t0g3pii.de/account).
+4. Modify the file:
+    - Search for `gamercard_url` and replace it with `gamercard_url = http://riitag.t0g3pii.de/wii?game={ID6}&key={KEY}`.
+    - Search for `gamercard_key` and replace it with `gamercard_key = <key>`, replacing `<key>` with your RiiTag key.
+5. Save the modified `config.txt`.
 
-![Success icon](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/OOjs_UI_icon_information-constructive.svg/20px-OOjs_UI_icon_information-constructive.svg.png) <u>*You have now set up RiiTag on Configurable USB Loader. Try launching a game to see if it works*</u>
+> ![Success icon](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/OOjs_UI_icon_information-constructive.svg/20px-OOjs_UI_icon_information-constructive.svg.png) ***Setup complete!** Launch a game to verify RiiTag functionality.*
 
+## RiiTag RPC
 
-## RiiTag-RPC
+> ![Info icon](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/OOjs_UI_icon_information-progressive.svg/20px-OOjs_UI_icon_information-progressive.svg.png) *This program displays your current game on your Discord profile alongside your RiiTag.*
 
 ### Requirements
+- [RiiTag RPC](https://github.com/t0g3pii/RiiTag-RPC/releases/latest)
 
--   [RiiTag RPC](https://github.com/t0g3pii/RiiTag-RPC/releases/latest)
+### Instructions
 
-#### Instructions
+1. Run the downloaded executable for your system.
+2. Once loaded, press **Enter** to show the login prompt.
+3. A dialog will appear asking if you want to authorize `RiiConnect24 Login`. Click **Authorize**.
 
-![Info icon](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/OOjs_UI_icon_information-progressive.svg/20px-OOjs_UI_icon_information-progressive.svg.png) <u>*This program shows your current game on your Discord profile, alongside your RiiTag*</u>
-
-1.  Run the downloaded executable for your system
-2.  Once it has loaded, press enter to show the login prompt
-3.  A dialog will appear asking if you want to authorize `Riitag`, press Authorize
-
-![Success icon](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/OOjs_UI_icon_information-constructive.svg/20px-OOjs_UI_icon_information-constructive.svg.png) <u>*You will now be logged into RiiTag RPC. Try launching a game to see if it works*</u>
+> ![Success icon](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/OOjs_UI_icon_information-constructive.svg/20px-OOjs_UI_icon_information-constructive.svg.png) ***Setup complete!** Launch a game to verify RiiTag RPC functionality.*
 
 ## UTag
 
-![Info icon](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/OOjs_UI_icon_information-progressive.svg/20px-OOjs_UI_icon_information-progressive.svg.png) <u>*This requires you have a [Modded Wii U](https://wiiu.hacks.guide/ "wiiuguide:") running the [Aroma environment](https://wiiu.hacks.guide/aroma/getting-started "wiiuguide:aroma/getting-started")*</u>
+> ![Info icon](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/OOjs_UI_icon_information-progressive.svg/20px-OOjs_UI_icon_information-progressive.svg.png) *This requires a [modded Wii U](https://wiiu.hacks.guide/) running the [Aroma environment](https://wiiu.hacks.guide/aroma/getting-started).*
 
 ### Requirements
+- [UTag](https://github.com/t0g3pii/UTag/releases/latest)
+- [Notepad++](https://notepad-plus-plus.org/downloads/)
 
--   [UTag](https://github.com/t0g3pii/UTag/releases/latest)
--   [Notepad++](https://notepad-plus-plus.org/downloads/)
+### Instructions
 
-#### Instructions
+1. Insert your SD card into your computer.
+2. Open the downloaded ZIP archive and copy `utag.wps` to `wiiu/environments/aroma/plugins/`.
+3. Visit [t0g3pii's RiiTag website](https://riitag.t0g3pii.de/).
+4. Login if you're not already logged in.
+5. Copy your RiiTag key from [here](https://riitag.t0g3pii.de/account).
 
-1.  Insert your SD card into your computer
-2.  Open `UTag-v2.2.0.zip` and copy utag.wps to `wiiu/environments/aroma/plugins/`
-3.  [Go to the t0g3pii's RiiTag website](https://riitag.t0g3pii.de/)
-4.  Press the Login button on the top right, then sign into your Discord account if you aren't already
-5.  A dialog will appear asking if you want to authorize `RiiConnect24 Login`, press Authorize
-6.  Press on your profile that is on the top right of the screen, then Account, then press Copy which will copy your RiiTag key
+> ![Warning icon](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/OOjs_UI_icon_information-warning.svg/20px-OOjs_UI_icon_information-warning.svg.png) ***Warning: Do not share your RiiTag key with anyone!** Sharing your key may allow others to misuse your tag.*
 
-![Warning icon](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/OOjs_UI_icon_information-warning.svg/20px-OOjs_UI_icon_information-warning.svg.png) <u>*Do not share your RiiTag key with anyone! If you do, people can abuse your tag.*</u>
+6. Create a text document named `utag.txt` in the `wiiu` folder on the root of your SD card.
+7. Open `utag.txt` in Notepad++ and paste your RiiTag key into the file.
+8. Save the file.
 
-8.  Create a Text Document called `utag.txt` in the `wiiu` folder that is on the root of your SD card
-9.  Open Notepad++, then go to File > Open, then go to the `utag.txt` file you just created
-10.  Paste your RiiTag key inside the text document, then go to File > Save
-
-![Success icon](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/OOjs_UI_icon_information-constructive.svg/20px-OOjs_UI_icon_information-constructive.svg.png) <u>*You have now set up RiiTag on your Wii U. Try launching a game to see if it works*</u>
-
+> ![Success icon](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/OOjs_UI_icon_information-constructive.svg/20px-OOjs_UI_icon_information-constructive.svg.png) ***Setup complete!** Launch a game to verify RiiTag functionality on your Wii U.*
