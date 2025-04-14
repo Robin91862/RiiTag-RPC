@@ -22,7 +22,7 @@ from prompt_toolkit.widgets import Button, Box, Label, Frame
 from sentry_sdk import configure_scope
 
 from riitag import oauth2, user, watcher, presence
-from riitag.util import get_cache
+from riitag.util import get_cache, get_cache_dir
 
 
 # Get resource when frozen with PyInstaller
@@ -155,7 +155,8 @@ class Menu(metaclass=abc.ABCMeta):
         # Geheime Tastenkombination für das Debug-Menü
         @kb.add('c-d')
         def open_debug_menu(_):
-            from menus import DebugMenu
+            # Hier müssen wir sicherstellen, dass wir in diesem Modul bleiben
+            # um zirkuläre Importe zu vermeiden
             self.app.set_menu(DebugMenu)
 
         extra_kb = self.get_kb() or KeyBindings()
