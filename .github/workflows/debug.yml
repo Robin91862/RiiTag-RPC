@@ -1,0 +1,116 @@
+name: debug
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Build-PC:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2022, ubuntu-22.04, ubuntu-20.04]
+
+    steps:
+    - name: Obtain latest version of the repository
+      uses: actions/checkout@v4
+    - name: Set up Python 3
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    - name: Install requirements with PIP
+      run: pip install --break-system-packages -r requirements.txt
+    - name: Install pyinstaller
+      run: pip install --break-system-packages pyinstaller
+    - name: Build RiiTag RPC
+      run: pyinstaller riitag-rpc.spec
+    - name: Mark as executable
+      if: ${{ matrix.os != 'windows-2022' }}
+      run: chmod -R +x dist/
+    - name: Publish Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.os }}-x64
+        path: dist
+  
+  Build-RPI:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        target: [rpi_4b_aarch64]
+        include:
+        - target: rpi_4b_aarch64
+          cpu: cortex-a53
+          cpu_info: cpuinfo/raspberrypi_4b
+          base_image: raspios_lite_arm64:latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build Raspberry pi release
+      uses: pguyot/arm-runner-action@v2
+      with:
+        base_image: ${{ matrix.base_image }}
+        cpu: ${{ matrix.cpu }}
+        cpu_info: ${{ matrix.cpu_info }}
+        bind_mount_repository: true
+        commands: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          pip3 install --break-system-packages -r requirements.txt
+          pip3 install --break-system-packages pyinstaller
+          pyinstaller riitag-rpc.spec
+          chmod +x -R dist/
+    - name: Publish Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: rpi-4b-aarch64
+        path: dist
+
+  Collect-Artifacts:
+    runs-on: ubuntu-22.04
+    needs: [Build-PC, Build-RPI]
+    steps:
+      - name: Download ubuntu-22.04-x64
+        uses: actions/download-artifact@v4
+        with:
+          name: ubuntu-22.04-x64
+          path: ubuntu22
+
+      - name: Download ubuntu-20.04-x64
+        uses: actions/download-artifact@v4
+        with:
+          name: ubuntu-20.04-x64
+          path: ubuntu20
+
+      - name: Download windows-2022-x64
+        uses: actions/download-artifact@v4
+        with:
+          name: windows-2022-x64
+          path: windows
+
+      - name: Download rpi-4b-aarch64
+        uses: actions/download-artifact@v4
+        with:
+          name: rpi-4b-aarch64
+          path: rpi4b
+
+      - name: Get environment variables
+        id: get_repository_name
+        run: |
+          echo REPOSITORY_NAME=$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $2}' | sed -e "s/:refs//") >> $GITHUB_ENV
+          echo DATETIME=$(echo $(date '+%Y%m%d-%H%M%S')) >> $GITHUB_ENV
+      
+      - name: Collect artifacts
+        run: |
+          mkdir -p releases
+          mv ubuntu22/riitag-rpc     releases/RiiTag-RPC_Ubuntu22
+          mv ubuntu20/riitag-rpc     releases/RiiTag-RPC_Ubuntu20
+          mv  windows/riitag-rpc.exe releases/RiiTag-RPC_Windows.exe
+          mv    rpi4b/riitag-rpc     releases/RiiTag-RPC_Rpi4B
+          chmod -R +x releases/
+          tar -cvf all-artifacts.tar.bz2 releases/
+
+      - name: Publish collected artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: all-artifacts
+          path: all-artifacts.tar.bz2
