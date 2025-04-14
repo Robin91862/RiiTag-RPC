@@ -19,7 +19,7 @@ To customize your RiiTag:
 1. Click your profile in the top-right corner of the website.
 2. Select **Edit RiiTag**.
 
-## Connecting Your USB Loader
+## Connecting your USB Loader
 
 ### USB Loader GX
 
@@ -28,7 +28,7 @@ To customize your RiiTag:
 3. Ensure **Initialize Network** is enabled.
 4. Close USB Loader GX.
 5. Insert the storage device containing USB Loader GX into your computer.
-6. Download the `Wiinnertag.xml` file from your RiiTag account page (go to your profile > **Account** and click **Download your Wiinnertag.xml**).
+6. Download the `Wiinnertag.xml` file from your [RiiTag account page](https://riitag.t0g3pii.de/account).
 7. Copy the downloaded `Wiinnertag.xml` to `/apps/usbloader_gx` on your storage device.
 
 > ![Success icon](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/OOjs_UI_icon_information-constructive.svg/20px-OOjs_UI_icon_information-constructive.svg.png) ***Setup complete!** Launch a game to verify RiiTag functionality.*
@@ -37,12 +37,13 @@ To customize your RiiTag:
 
 1. Insert the storage device containing WiiFlow into your computer.
 2. Open `/apps/wiiflow/wiiflow.ini` in a text editor.
-3. Modify the file:
+3. Copy your RiiTag key from [here](https://riitag.t0g3pii.de/account).
+4. Modify the file:
+    - Search for `gamercards_enable` and replace it with `gamercards_enable=yes`.
     - Search for `gamercards` and replace it with `gamercards=wiinnertag`.
     - Search for `wiinnertag_url` and replace it with `wiinnertag_url=https://riitag.t0g3pii.de/wii?game={ID6}&key={KEY}`.
-    - Search for `wiinnertag_key` and replace it with `wiinnertag_key=<key>`, replacing `<key>` with the key from your RiiTag account page (go to your profile > **Account** and click **Copy** to copy your RiiTag key).
-    - Search for `gamercards_enable` and replace it with `gamercards_enable=yes`.
-4. Save the modified `wiiflow.ini`.
+    - Search for `wiinnertag_key` and replace it with `wiinnertag_key=<key>`, replacing `<key>` with your RiiTag key.
+5. Save the modified `wiiflow.ini`.
 
 > ![Success icon](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/OOjs_UI_icon_information-constructive.svg/20px-OOjs_UI_icon_information-constructive.svg.png) ***Setup complete!** Launch a game to verify RiiTag functionality.*
 
@@ -54,10 +55,11 @@ To customize your RiiTag:
 
 1. Insert the storage device containing Configurable USB Loader into your computer.
 2. Open `/usb-loader/config.txt` in a text editor.
-3. Modify the file:
+3. Copy your RiiTag key from [here](https://riitag.t0g3pii.de/account).
+4. Modify the file:
     - Search for `gamercard_url` and replace it with `gamercard_url = http://riitag.t0g3pii.de/wii?game={ID6}&key={KEY}`.
-    - Search for `gamercard_key` and replace it with `gamercard_key = <key>`, replacing `<key>` with the key from your RiiTag account page (go to your profile > **Account** and click **Copy** to copy your RiiTag key).
-4. Save the modified `config.txt`.
+    - Search for `gamercard_key` and replace it with `gamercard_key = <key>`, replacing `<key>` with your RiiTag key.
+5. Save the modified `config.txt`.
 
 > ![Success icon](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/OOjs_UI_icon_information-constructive.svg/20px-OOjs_UI_icon_information-constructive.svg.png) ***Setup complete!** Launch a game to verify RiiTag functionality.*
 
@@ -72,7 +74,7 @@ To customize your RiiTag:
 
 1. Run the downloaded executable for your system.
 2. Once loaded, press **Enter** to show the login prompt.
-3. A dialog will appear asking if you want to authorize `RiiTag`. Click **Authorize**.
+3. A dialog will appear asking if you want to authorize `RiiConnect24 Login`. Click **Authorize**.
 
 > ![Success icon](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/OOjs_UI_icon_information-constructive.svg/20px-OOjs_UI_icon_information-constructive.svg.png) ***Setup complete!** Launch a game to verify RiiTag RPC functionality.*
 
@@ -90,7 +92,7 @@ To customize your RiiTag:
 2. Open the downloaded ZIP archive and copy `utag.wps` to `wiiu/environments/aroma/plugins/`.
 3. Visit [t0g3pii's RiiTag website](https://riitag.t0g3pii.de/).
 4. Login if you're not already logged in.
-5. Go to your profile > **Account** and click **Copy** to copy your RiiTag key.
+5. Copy your RiiTag key from [here](https://riitag.t0g3pii.de/account).
 
 > ![Warning icon](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/OOjs_UI_icon_information-warning.svg/20px-OOjs_UI_icon_information-warning.svg.png) ***Warning: Do not share your RiiTag key with anyone!** Sharing your key may allow others to misuse your tag.*
 
