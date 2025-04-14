@@ -151,6 +151,12 @@ class Menu(metaclass=abc.ABCMeta):
         @kb.add('q')
         def exit_app(_):
             self.quit_app()
+        
+        # Geheime Tastenkombination für das Debug-Menü
+        @kb.add('c-d')
+        def open_debug_menu(_):
+            from menus import DebugMenu
+            self.app.set_menu(DebugMenu)
 
         extra_kb = self.get_kb() or KeyBindings()
         return merge_key_bindings([kb, extra_kb])
@@ -173,7 +179,7 @@ class SplashScreen(Menu):
         return HSplit([
             Window(FormattedTextControl(BANNER), align=WindowAlign.CENTER),
             Window(FormattedTextControl(
-                f'{self.app.version_string}\nCreated by Mike Almeloo\n\n\n{self.status_str}'),
+                f'{self.app.version_string}\nCreated by Mike Almeloo\nForked and edited with ♥ by t0g3pii\n\n{self.status_str}'),
                 align=WindowAlign.CENTER
             )
         ])
@@ -440,6 +446,7 @@ class MainMenu(Menu):
         self.app.layout.focus(self.menu_settings_button)
         self._start_thread()
 
+    # In der get_layout Methode der MainMenu Klasse:
     def get_layout(self):
         game_labels = []
         for game in self.riitag_info.games:
@@ -456,6 +463,9 @@ class MainMenu(Menu):
                 label_text = HTML('<b>-</b> {}').format(console_and_game_id[0])
             game_labels.append(Label(label_text))
 
+        # RPC Status ermitteln
+        rpc_status = "Connected" if self.app.rpc_handler.is_connected else "Disconnected"
+        
         right_panel_layout = HSplit([])
         if self.right_panel_state == 'Menu':
             right_panel_layout = self.menu_layout
@@ -472,8 +482,15 @@ class MainMenu(Menu):
                 Frame(
                     Box(
                         HSplit([
-                            Label(HTML('<b>Name:</b>   {}').format(self.riitag_info.name)),
-                            Label(HTML('<b>Games:</b>  {}').format(len(game_labels))),
+                            # Geändert von "Name" zu "RiiTag Username"
+                            Label(HTML('<b>RiiTag Username:</b> {}').format(self.riitag_info.name)),
+                            # Discord Benutzername hinzugefügt
+                            Label(HTML('<b>Discord:</b> {}').format(
+                                self.app.user.username if self.app.user else "Unknown"
+                            )),
+                            # RPC Status hinzugefügt
+                            Label(HTML('<b>Status:</b> {}').format(rpc_status)),
+                            Label(HTML('<b>Games:</b> {}').format(len(game_labels))),
                             *game_labels
                         ]), padding_left=3, padding_top=2
                     ), title='RiiTag'),
@@ -606,3 +623,120 @@ class MainMenu(Menu):
             message_callback=None
         )
         self.app.riitag_watcher.start()
+
+class DebugMenu(Menu):
+    name = 'Debug Menu'
+    is_framed = True
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        self.back_button = Button('Back to Main Menu', handler=self._go_back)
+        self.refresh_button = Button('Refresh Data', handler=self._refresh_data)
+        
+        # Debug-Statistiken
+        self.rpc_connection_attempts = 0
+        self.last_error = "None"
+        self.last_update_time = "Never"
+        self.cache_info = {}
+        
+        # Debug-Daten holen
+        self._refresh_data()
+
+    def _go_back(self):
+        self.app.set_menu(MainMenu)
+        
+    def _refresh_data(self):
+        # RPC-Verbindungsstatistik
+        if hasattr(self.app, '_connect_attempt'):
+            self.rpc_connection_attempts = self.app._connect_attempt
+        
+        # Cache-Informationen sammeln
+        cache_dir = get_cache_dir()
+        self.cache_info = {
+            'directory': cache_dir,
+            'token_exists': os.path.exists(get_cache('token.json')),
+            'prefs_exists': os.path.exists(get_cache('prefs.json')),
+            'uid_exists': os.path.exists(get_cache('_uid'))
+        }
+        
+        # Letzte Aktualisierungszeit holen, falls vorhanden
+        if hasattr(self.app, 'riitag_watcher') and self.app.riitag_watcher:
+            self.last_update_time = self.app.riitag_watcher._last_check.strftime("%Y-%m-%d %H:%M:%S")
+        
+        self.update()
+
+    def get_layout(self):
+        # Ermittle RPC-Status mit Details
+        rpc_status = "Connected" if self.app.rpc_handler.is_connected else "Disconnected"
+        
+        # Discord-Token-Info
+        token_info = "Valid"
+        if not self.app.token:
+            token_info = "Not available"
+        elif self.app.token.needs_refresh:
+            token_info = "Needs refresh"
+        
+        # RiiTag-Info
+        riitag_info = "Valid"
+        if not self.app.user or not hasattr(self.app.user, 'riitag') or not self.app.user.riitag:
+            riitag_info = "Not available"
+        
+        return HSplit([
+            # Prominente Sicherheitswarnung
+            Window(
+                FormattedTextControl(HTML(
+                    '<ansired><b>!!! SECURITY WARNING !!!</b></ansired>\n'
+                    '<ansired>DO NOT SHARE ANY INFORMATION FROM THIS DEBUG SCREEN</ansired>\n'
+                    '<ansired>with anyone except t0g3pii (the developer).</ansired>\n'
+                    '<ansired>Contains sensitive data that could lead to account access!</ansired>'
+                )),
+                align=WindowAlign.CENTER,
+                height=4
+            ),
+            Label(''),
+            Label(HTML('<b>== RiiTag-RPC Debug Information ==</b>')),
+            Label(''),
+            Label(HTML('<b>Version:</b> {}').format(self.app.version_string)),
+            Label(HTML('<b>Discord RPC Status:</b> {}').format(rpc_status)),
+            Label(HTML('<b>RPC Connection Attempts:</b> {}').format(self.rpc_connection_attempts)),
+            Label(HTML('<b>Discord Token:</b> {}').format(token_info)),
+            Label(HTML('<b>RiiTag Status:</b> {}').format(riitag_info)),
+            Label(HTML('<b>Last Update:</b> {}').format(self.last_update_time)),
+            Label(''),
+            Label(HTML('<b>== Cache Information ==</b>')),
+            Label(HTML('<b>Cache Directory:</b> {}').format(self.cache_info.get('directory', 'Unknown'))),
+            Label(HTML('<b>Token File:</b> {}').format('Present' if self.cache_info.get('token_exists') else 'Missing')),
+            Label(HTML('<b>Preferences File:</b> {}').format('Present' if self.cache_info.get('prefs_exists') else 'Missing')),
+            Label(HTML('<b>User ID File:</b> {}').format('Present' if self.cache_info.get('uid_exists') else 'Missing')),
+            Label(''),
+            Label(HTML('<b>== User Information ==</b>')),
+            Label(HTML('<b>Discord User:</b> {}#{}').format(
+                self.app.user.username if self.app.user else "Unknown",
+                self.app.user.discriminator if self.app.user else "0000"
+            )),
+            Label(HTML('<b>Discord ID:</b> {}').format(self.app.user.id if self.app.user else "Unknown")),
+            Label(HTML('<b>RiiTag Username:</b> {}').format(
+                self.app.user.riitag.name if self.app.user and hasattr(self.app.user, 'riitag') and self.app.user.riitag else "Unknown"
+            )),
+            Label(''),
+            VSplit([
+                self.back_button,
+                self.refresh_button
+            ], align=WindowAlign.CENTER)
+        ])
+
+    def get_kb(self):
+        kb = KeyBindings()
+
+        @kb.add('tab')
+        @kb.add('down')
+        def next_option(event):
+            focus_next(event)
+
+        @kb.add('s-tab')
+        @kb.add('up')
+        def prev_option(event):
+            focus_previous(event)
+            
+        return kb
