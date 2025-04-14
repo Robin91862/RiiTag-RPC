@@ -632,8 +632,8 @@ class DebugMenu(Menu):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         
-        self.back_button = Button('Back to Main Menu', handler=self._go_back)
-        self.refresh_button = Button('Refresh Data', handler=self._refresh_data)
+        self.back_button = Button('Back to Main Menu', width=20, handler=self._go_back)
+        self.refresh_button = Button('Refresh Data', width=20, handler=self._refresh_data)
         
         # Debug-Statistiken
         self.rpc_connection_attempts = 0
@@ -667,6 +667,11 @@ class DebugMenu(Menu):
         
         self.update()
 
+    def on_start(self):
+        super().on_start()
+        # Focus auf den ersten Button beim Start
+        self.app.layout.focus(self.back_button)
+
     def get_layout(self):
         # Ermittle RPC-Status mit Details
         rpc_status = "Connected" if self.app.rpc_handler.is_connected else "Disconnected"
@@ -683,7 +688,32 @@ class DebugMenu(Menu):
         if not self.app.user or not hasattr(self.app.user, 'riitag') or not self.app.user.riitag:
             riitag_info = "Not available"
         
-        return HSplit([
+        # Aktuell angezeigtes Spiel ermitteln
+        current_game_info = "Not displaying any game"
+        last_played_info = "No game data available"
+        
+        # Prüfe, ob riitag_watcher existiert und Daten enthält
+        if (hasattr(self.app, 'riitag_watcher') and self.app.riitag_watcher and 
+            hasattr(self.app.riitag_watcher, '_last_riitag') and 
+            self.app.riitag_watcher._last_riitag):
+            
+            last_riitag = self.app.riitag_watcher._last_riitag
+            
+            # Prüfe, ob ein Spiel zuletzt gespielt wurde
+            if last_riitag.last_played and last_riitag.last_played.game_id:
+                game_id = last_riitag.last_played.game_id
+                console = last_riitag.last_played.console
+                last_played_info = f"{game_id} ({console})"
+                
+                # Prüfe, ob das Spiel aktuell angezeigt wird oder veraltet ist
+                if not last_riitag.outdated:
+                    current_game_info = f"Displaying: {game_id} ({console})"
+                else:
+                    current_game_info = f"Game outdated (timeout): {game_id}"
+        
+        # Hier erstellen wir ein Split Layout mit Links- und Rechtsbereich
+        # ähnlich wie im Hauptmenü
+        main_content = HSplit([
             # Prominente Sicherheitswarnung
             Window(
                 FormattedTextControl(HTML(
@@ -700,6 +730,8 @@ class DebugMenu(Menu):
             Label(''),
             Label(HTML('<b>Version:</b> {}').format(self.app.version_string)),
             Label(HTML('<b>Discord RPC Status:</b> {}').format(rpc_status)),
+            Label(HTML('<b>RPC Display:</b> {}').format(current_game_info)),
+            Label(HTML('<b>Last Played Game:</b> {}').format(last_played_info)),
             Label(HTML('<b>RPC Connection Attempts:</b> {}').format(self.rpc_connection_attempts)),
             Label(HTML('<b>Discord Token:</b> {}').format(token_info)),
             Label(HTML('<b>RiiTag Status:</b> {}').format(riitag_info)),
@@ -720,11 +752,27 @@ class DebugMenu(Menu):
             Label(HTML('<b>RiiTag Username:</b> {}').format(
                 self.app.user.riitag.name if self.app.user and hasattr(self.app.user, 'riitag') and self.app.user.riitag else "Unknown"
             )),
-            Label(''),
-            VSplit([
-                self.back_button,
-                self.refresh_button
-            ], align=WindowAlign.CENTER)
+        ])
+        
+        # Rechter Bereich für die Buttons - ähnlich wie im Hauptmenü, 
+        # jetzt mit fester Breite für die Buttons
+        button_layout = Frame(
+            Box(
+                HSplit([
+                    self.back_button,
+                    Label(''),
+                    self.refresh_button,
+                ]),
+                padding_left=3,
+                padding_top=2,
+                width=30  # Feste Breite für den rechten Bereich
+            ),
+            title='Menu'
+        )
+        
+        return VSplit([
+            main_content,
+            button_layout  # Buttons rechts angeordnet wie im Hauptmenü
         ])
 
     def get_kb(self):
