@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2022, ubuntu-22.04, ubuntu-20.04]
+        os: [windows-2022, ubuntu-22.04, ubuntu-20.04, macos-13]
 
     steps:
     - name: Obtain latest version of the repository
@@ -81,6 +81,12 @@ jobs:
           name: ubuntu-20.04-x64
           path: ubuntu20
 
+      - name: Download macos-13-x64
+        uses: actions/download-artifact@v4
+        with:
+          name: macos-13-x64
+          path: macos
+
       - name: Download windows-2022-x64
         uses: actions/download-artifact@v4
         with:
@@ -104,6 +110,7 @@ jobs:
           mkdir -p releases
           mv ubuntu22/riitag-rpc     releases/RiiTag-RPC_Ubuntu22
           mv ubuntu20/riitag-rpc     releases/RiiTag-RPC_Ubuntu20
+          mv    macos/riitag-rpc     releases/RiiTag-RPC_MacOS
           mv  windows/riitag-rpc.exe releases/RiiTag-RPC_Windows.exe
           mv    rpi4b/riitag-rpc     releases/RiiTag-RPC_Rpi4B
           chmod -R +x releases/
